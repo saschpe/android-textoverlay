@@ -1,0 +1,124 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode 1
+        versionName '1.0'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile "com.android.support:support-v4:$project.supportLibraryVersion"
+}
+
+group = 'saschpe'
+version = android.defaultConfig.versionName
+
+ext {
+    siteUrl = 'https://github.com/saschpe/android-textoverlay'
+    gitUrl = 'https://github.com/saschpe/android-textoverlay.git'
+    descr = 'Text overlay service.'
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = 'maven'
+        name = 'android-textoverlay'
+        userOrg = 'saschpe'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/saschpe/android-textoverlay/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        desc = descr
+        labels = ['aar', 'android']
+        publish = true
+        publicDownloadNumbers = true
+
+        githubRepo = 'saschpe/android-textoverlay'
+        githubReleaseNotesFile = 'README.md'
+
+        version {
+            name = android.defaultConfig.versionName
+            desc = descr
+        }
+    }
+}
+
+task createPom {
+    pom {
+        project {
+            packaging 'aar'
+
+            name project.name
+            description descr
+            url siteUrl
+            inceptionYear '2016'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
+            developers {
+                developer {
+                    id 'saschpe'
+                    name 'Sascha Peilicke'
+                    email 'sascha@peilicke.de'
+                }
+            }
+        }
+    }.writeTo("$buildDir/poms/pom-default.xml").writeTo("pom.xml")
+}
+build.dependsOn createPom
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TextOverlay Example</string>
+
+    <string name="description">Text overlay information is displayed as a system window atop of other content.</string>
+</resources>
