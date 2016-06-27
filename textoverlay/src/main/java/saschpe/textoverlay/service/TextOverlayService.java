@@ -17,6 +17,16 @@ import saschpe.textoverlay.BuildConfig;
 
 /**
  * Service to display an overlay of arbitrary text.
+ *
+ * Useful for debugging purposes, because all QA / beta tester screenshots will include
+ * build type, product flavor and additional information provided by you.
+ *
+ * If the app targets API level 23 or higher, the app user must explicitly grant this permission to
+ * the app through a permission management screen. You can either do this yourself or use the
+ * {@link saschpe.textoverlay.app.TextOverlayActivityLifecycleCallbacks} for convenience.
+ *
+ * @see <a href="https://developer.android.com/reference/android/Manifest.permission.html#SYSTEM_ALERT_WINDOW">SYSTEM_ALERT_WINDOW</a>
+ * @see <a href="https://developer.android.com/reference/android/provider/Settings.html#ACTION_MANAGE_OVERLAY_PERMISSION">ACTION_MANAGE_OVERLAY_PERMISSION</a>
  */
 public final class TextOverlayService extends Service {
     private static final String TAG = TextOverlayService.class.getSimpleName();

@@ -4,7 +4,8 @@ system-window overlay.
 
 It can be used to display debugging information in the debug build of your app so
 that every screenshot that QA or beta testers do will automatically include the
-Git commit hash or version information right away:
+product flavor or build type of your APK. You can provide additional information
+such as the Git commit hash or arbitrary strings easily:
 
 -![Example](doc/img/example.png)
 
@@ -56,6 +57,10 @@ service in specific flavors or build types:
 ```xml
 <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 ```
+
+On API level 23 or later, you will have to ask for the
+
+
 
 Check out the sample app in `app/` to see it in action.
 
