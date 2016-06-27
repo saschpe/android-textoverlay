@@ -23,7 +23,7 @@ task clean(type: Delete) {
 ext {
     // Sdk and tools
     minSdkVersion = 14
-    targetSdkVersion = 23
+    targetSdkVersion = 22 // Avoid action ACTION_MANAGE_OVERLAY_PERMISSION
     compileSdkVersion = 23
     buildToolsVersion = '24.0.0'
 

@@ -21,10 +21,22 @@ import saschpe.textoverlay.BuildConfig;
 public class TextOverlayService extends Service {
     private static final String TAG = TextOverlayService.class.getSimpleName();
 
-    public static final String EVENT_SET_OVERLAY_TEXT = "saschpe.textoverlay.service.SET_OVERLAY_TEXT";
-    public static final String ACTION_OVERLAY_TEXT = "saschpe.textoverlay.service.text";
+    public static final String ACTION_SET_TEXT = "saschpe.textoverlay.service.SET_TEXT";
+    public static final String EXTRA_TEXT = "saschpe.textoverlay.service.text";
 
     private TextView textView;
+
+    /**
+     * Helper method that simplifies updating overlay text.
+     *
+     * @param context A context.
+     * @param text The new text.
+     */
+    public static void setText(final Context context, final CharSequence text) {
+        Intent intent = new Intent(TextOverlayService.ACTION_SET_TEXT);
+        intent.putExtra(TextOverlayService.EXTRA_TEXT, text);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
 
     // Our handler for received Intents. This will be called whenever an Intent
     // with an action named "custom-event-name" is broadcasted.
@@ -32,10 +44,10 @@ public class TextOverlayService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
-            final String message = intent.getStringExtra(ACTION_OVERLAY_TEXT);
+            final String message = intent.getStringExtra(EXTRA_TEXT);
             if (message != null) {
                 Log.d(TAG, "onReceive() Got message: " + message);
-                updateText(message);
+                setText(message);
             }
         }
     };
@@ -43,14 +55,7 @@ public class TextOverlayService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         textView = new TextView(this);
-        updateText("");
-
-        // Set default text
-        //SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        //updateText(settings.getString(getString(R.string.pref_webservice_endpoint_key), getString(R.string.pref_webservice_endpoint_default)));
-        //textView.setTextColor(accentTextColor);
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -66,7 +71,7 @@ public class TextOverlayService extends Service {
 
         // Register to receive messages
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver,
-                new IntentFilter(EVENT_SET_OVERLAY_TEXT));
+                new IntentFilter(ACTION_SET_TEXT));
     }
 
     @Override
@@ -84,7 +89,7 @@ public class TextOverlayService extends Service {
         return null;
     }
 
-    private void updateText(final String extraText) {
+    private void setText(final String extraText) {
         String overlayText = BuildConfig.FLAVOR + "-" + BuildConfig.BUILD_TYPE + " " + BuildConfig.VERSION_NAME;
         if (BuildConfig.DEBUG) {
             overlayText += extraText;

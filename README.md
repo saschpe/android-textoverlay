@@ -1,30 +1,29 @@
-TextOverlay
------------
+# TextOverlay
+This library provides a simple service that allows to display arbitrary text as a
+system-window overlay.
 
-All about activities have a version info widget somewhere. This library provides one that can be
-used as a dialog or fragment. It honors default styling rules, Material-style:
+It can be used to display debugging information in the debug build of your app so
+that every screenshot that QA or beta testers do will automatically include the
+Git commit hash or version information right away:
 
-![Dialog](doc/img/versioninfo-sample-dialog.png)
-![Fragment](doc/img/versioninfo-sample-fragment.png)
+-![Example](doc/img/example.png)
 
 
-Usage
------
-
+# Usage
 You can start / stop the text overlay service the default way in your activities:
 
 ```java
-    @Override
-    protected void onResume() {
-        super.onResume();
-        startService(new Intent(this, TextOverlayService.class));
-    }
+@Override
+protected void onResume() {
+    super.onResume();
+    startService(new Intent(this, TextOverlayService.class));
+}
 
-    @Override
-    protected void onPause() {
-        stopService(new Intent(this, TextOverlayService.class));
-        super.onPause();
-    }
+@Override
+protected void onPause() {
+    stopService(new Intent(this, TextOverlayService.class));
+    super.onPause();
+}
 ```
 
 A more convenient way is to use the include activity lifecycle callbacks in your
@@ -40,12 +39,28 @@ public class Application extends android.app.Application {
 }
 ```
 
+Furthermore, you can declare the service in your *AndroidManifest.xml* to provide
+additional parameters. This is entirely optional as the library will provide a
+default declaration for you:
+
+```xml
+<service
+    android:name=".service.TextOverlayService"
+    android:exported="false" />
+```
+
+Either way, you have to declare the SYSTEM_ALERT_WINDOW permission in you manifest.
+The library does not do that for you since you may only want to use the text overlay
+service in specific flavors or build types:
+
+```xml
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+```
+
 Check out the sample app in `app/` to see it in action.
 
 
-Download
---------
-
+# Download
 ```groovy
 compile 'saschpe:textoverlay:1.0.0'
 ```
@@ -53,8 +68,7 @@ compile 'saschpe:textoverlay:1.0.0'
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
 
 
-License
--------
+# License
 
     Copyright 2016 Sascha Peilicke
 

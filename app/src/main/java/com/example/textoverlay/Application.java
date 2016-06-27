@@ -7,6 +7,9 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
 
-        registerActivityLifecycleCallbacks(new TextOverlayActivityLifecycleCallbacks());
+        // Let's use the text overlay service only to display information on debug builds:
+        if (BuildConfig.DEBUG) {
+            registerActivityLifecycleCallbacks(new TextOverlayActivityLifecycleCallbacks());
+        }
     }
 }
