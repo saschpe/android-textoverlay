@@ -18,7 +18,7 @@ import saschpe.textoverlay.BuildConfig;
 /**
  * Service to display an overlay of arbitrary text.
  */
-public class TextOverlayService extends Service {
+public final class TextOverlayService extends Service {
     private static final String TAG = TextOverlayService.class.getSimpleName();
 
     public static final String ACTION_SET_TEXT = "saschpe.textoverlay.service.SET_TEXT";

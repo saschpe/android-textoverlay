@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import saschpe.textoverlay.service.TextOverlayService;
 
-public class TextOverlayActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
+public final class TextOverlayActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
