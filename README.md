@@ -1,4 +1,6 @@
 # TextOverlay
+[ ![Download](https://api.bintray.com/packages/saschpe/maven/android-textoverlay/images/download.svg) ](https://bintray.com/saschpe/maven/android-textoverlay/_latestVersion)
+
 This library provides a simple service that allows to display arbitrary text as a
 system-window overlay.
 
