@@ -1,30 +1,43 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Script to create a new Android versionName commit
 #
 # Semantic Versioning: MAJOR.MINOR.PATCH
-set +x
+
+. "tools/inc.functions"
+
 if [ $# -ne 1 ] ; then
-    echo "Usage: $0 [VERSION_NAME]"
-    echo "\n\tExample $0 0.0.1"
-    exit 1
+    die "Usage: $0 [VERSION]\n\n\tExample: $0 0.0.1"
 fi
 
 APP_GRADLE="app/build.gradle"
-LIB_GRADLE="versioninfo/build.gradle"
+LIB_GRADLE="textoverlay/build.gradle"
+README="README.md"
 
-OLD_VERSION_NAME=$(grep versionName $APP_GRADLE | cut -d"\"" -f2)
-NEW_VERSION_NAME=$1
-OLD_VERSION_CODE=$(grep versionCode $APP_GRADLE | cut -d" " -f10 ) # VERY FLAKY!
+# Increase SDK version (used as versionName in most modules)
+OLD_VERSION=$(get_version_name $LIB_GRADLE)
+NEW_VERSION=$1
+
+if [ "$NEW_VERSION" \< "$OLD_VERSION" -o "$NEW_VERSION" = "$OLD_VERSION" ] ; then
+    die "Error: We are already at version $OLD_VERSION"
+fi
+
+# Replace versionName in gradle files
+sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $APP_GRADLE
+sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $LIB_GRADLE
+# Replace in README.md
+sed -i -e "s|saschpe:textoverlay:$OLD_VERSION|saschpe:textoverlay:$NEW_VERSION|" $README
+
+# Take version code from app gradle
+OLD_VERSION_CODE=$(get_version_code $APP_GRADLE)
 NEW_VERSION_CODE=$(($OLD_VERSION_CODE+1))
-
-# Replace version name
-sed -e "s/versionName \"$OLD_VERSION_NAME/versionName \"$NEW_VERSION_NAME/" -i "" $APP_GRADLE
-sed -e "s/versionName \"$OLD_VERSION_NAME/versionName \"$NEW_VERSION_NAME/" -i "" $LIB_GRADLE
 # Bump version code for Google's Play Store
-sed -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" -i "" $APP_GRADLE
+sed -i -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" $APP_GRADLE
 
 # Create a commit with appropriate git tag
-git commit $APP_GRADLE -m "Bump to version $NEW_VERSION_NAME (version code $NEW_VERSION_CODE)"
-# TODO(saschpe): Maybe only tag MAJOR / MINOR updates, not PATCH level updates
-git tag $NEW_VERSION_NAME 
+git commit \
+    $APP_GRADLE \
+    $LIB_GRADLE \
+    $README \
+    -m "Bump to version $NEW_VERSION (examples version code $NEW_VERSION_CODE)"
+git tag release/$NEW_VERSION 
