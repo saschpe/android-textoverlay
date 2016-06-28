@@ -9,7 +9,7 @@ android {
         targetSdkVersion project.targetSdkVersion
         applicationId 'com.example.versioninfo'
         versionCode 1
-        versionName '1.2'
+        versionName '1.0.0'
     }
 
     lintOptions {
