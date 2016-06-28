@@ -1,11 +1,16 @@
-package com.example.textoverlay.activity;
+package com.example.textoverlay.two.activity;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.textoverlay.R;
+import com.example.textoverlay.two.BuildConfig;
+import com.example.textoverlay.two.R;
 
 import saschpe.textoverlay.service.TextOverlayService;
 
@@ -21,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.editText);
 
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+            }
+        }
 
         /*// Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(activity,
@@ -51,5 +63,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void setText(View view) {
         TextOverlayService.setText(this, editText.getText().toString());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        String overlayText = BuildConfig.APPLICATION_ID + " (" + BuildConfig.VERSION_NAME + " - "
+                + BuildConfig.BUILD_TYPE + ")";
+
+        Intent intent = new Intent(this, TextOverlayService.class);
+        intent.putExtra(TextOverlayService.EXTRA_TEXT, overlayText);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (Settings.canDrawOverlays(this)) {
+                startService(intent);
+            }
+        } else {
+            startService(intent);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopService(new Intent(this, TextOverlayService.class));
     }
 }

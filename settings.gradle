@@ -1,1 +1,1 @@
-include ':app', ':textoverlay'
+include ':textoverlay', ':textoverlay-activity-example', ':textoverlay-lifecycle-example'

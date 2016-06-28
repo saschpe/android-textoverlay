@@ -9,7 +9,6 @@ such as the Git commit hash or arbitrary strings easily:
 
 -![Example](doc/img/example.png)
 
-
 # Usage
 You can start / stop the text overlay service the default way in your activities:
 
@@ -61,7 +60,9 @@ service in specific flavors or build types:
 On API level 23 or later, you will have to ask the user to grant this permission.
 However, the provided *TextOverlayActivityLifecycleCallbacks* will handle that for you.
 
-Check out the sample app in `app/` to see it in action.
+Check out the provided example applications for different ways to use this library:
+- textoverlay-activity-example
+- textoverlay-lifecycle-example
 
 
 # Download

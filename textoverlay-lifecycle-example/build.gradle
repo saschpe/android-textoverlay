@@ -1,0 +1,24 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        applicationId 'com.example.textoverlay.one'
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile project(':textoverlay')
+
+    compile "com.android.support:appcompat-v7:$project.supportLibraryVersion"
+}

@@ -10,7 +10,8 @@ if [ $# -ne 1 ] ; then
     die "Usage: $0 [VERSION]\n\n\tExample: $0 0.0.1"
 fi
 
-APP_GRADLE="app/build.gradle"
+EXAMPLE_ONE="textoverlay-activity-example/build.gradle"
+EXAMPLE_TWO="textoverlay-lifecycle-example/build.gradle"
 LIB_GRADLE="textoverlay/build.gradle"
 README="README.md"
 
@@ -23,20 +24,23 @@ if [ "$NEW_VERSION" \< "$OLD_VERSION" -o "$NEW_VERSION" = "$OLD_VERSION" ] ; the
 fi
 
 # Replace versionName in gradle files
-sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $APP_GRADLE
+sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $EXAMPLE_ONE
+sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $EXAMPLE_TWO
 sed -i -e "s|versionName '$OLD_VERSION|versionName '$NEW_VERSION|" $LIB_GRADLE
 # Replace in README.md
 sed -i -e "s|saschpe:textoverlay:$OLD_VERSION|saschpe:textoverlay:$NEW_VERSION|" $README
 
 # Take version code from app gradle
-OLD_VERSION_CODE=$(get_version_code $APP_GRADLE)
+OLD_VERSION_CODE=$(get_version_code $EXAMPLE_ONE)
 NEW_VERSION_CODE=$(($OLD_VERSION_CODE+1))
 # Bump version code for Google's Play Store
-sed -i -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" $APP_GRADLE
+sed -i -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" $EXAMPLE_ONE
+sed -i -e "s/versionCode $OLD_VERSION_CODE/versionCode $NEW_VERSION_CODE/" $EXAMPLE_TWO
 
 # Create a commit with appropriate git tag
 git commit \
-    $APP_GRADLE \
+    $EXAMPLE_ONE \
+    $EXAMPLE_TWO \
     $LIB_GRADLE \
     $README \
     -m "Bump to version $NEW_VERSION (examples version code $NEW_VERSION_CODE)"

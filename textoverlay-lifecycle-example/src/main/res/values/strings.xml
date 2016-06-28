@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TextOverlay Lifecycle Example</string>
+
+    <string name="description">Text overlay information is displayed as a system window atop of
+        other content. Enter some text below and send a broadcast to update the text.</string>
+    <string name="update_text">Update text</string>
+</resources>
