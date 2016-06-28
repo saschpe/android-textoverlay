@@ -15,15 +15,15 @@ You can start / stop the text overlay service the default way in your activities
 
 ```java
 @Override
-protected void onResume() {
-    super.onResume();
+protected void onStart() {
+    super.onStart();
     startService(new Intent(this, TextOverlayService.class));
 }
 
 @Override
-protected void onPause() {
+protected void onDestroy() {
     stopService(new Intent(this, TextOverlayService.class));
-    super.onPause();
+    super.onDestroy();
 }
 ```
 
@@ -58,9 +58,8 @@ service in specific flavors or build types:
 <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 ```
 
-On API level 23 or later, you will have to ask for the
-
-
+On API level 23 or later, you will have to ask the user to grant this permission.
+However, the provided *TextOverlayActivityLifecycleCallbacks* will handle that for you.
 
 Check out the sample app in `app/` to see it in action.
 

@@ -1,15 +1,17 @@
 package com.example.textoverlay;
 
 import saschpe.textoverlay.app.TextOverlayActivityLifecycleCallbacks;
+import saschpe.textoverlay.service.TextOverlayService;
 
 public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // Let's use the text overlay service only to display information on debug builds:
-        if (BuildConfig.DEBUG) {
-            registerActivityLifecycleCallbacks(new TextOverlayActivityLifecycleCallbacks());
-        }
+        String overlayText = BuildConfig.APPLICATION_ID + " (" + BuildConfig.VERSION_NAME + " - "
+                + BuildConfig.BUILD_TYPE + ")";
+        TextOverlayService.setText(this, overlayText);
+
+        registerActivityLifecycleCallbacks(new TextOverlayActivityLifecycleCallbacks());
     }
 }

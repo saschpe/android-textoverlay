@@ -22,40 +22,46 @@ import saschpe.textoverlay.service.TextOverlayService;
  */
 public final class TextOverlayActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     private static final String TAG = TextOverlayActivityLifecycleCallbacks.class.getSimpleName();
+    private static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         Log.d(TAG, "onActivityCreated");
-        if (Build.VERSION.SDK_INT >= 23 && !Settings.canDrawOverlays(activity)) {
-            Log.d(TAG, "onActivityCreated: API level 23 and not can draw overlays");
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + activity.getPackageName()));
-            activity.startActivityForResult(intent, 1234);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(activity)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + activity.getPackageName()));
+                activity.startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
+            }
         }
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-
-    }
-
-    @Override
-    public void onActivityResumed(Activity activity) {
-        Log.d(TAG, "onActivityResumed");
-        if (Build.VERSION.SDK_INT >= 23 && Settings.canDrawOverlays(activity)) {
-            Log.d(TAG, "onActivityResumed: API level 23 and can draw overlays");
+        Log.d(TAG, "onActivityStarted");
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (Settings.canDrawOverlays(activity)) {
+                Log.d(TAG, "onActivityStarted: API level 23 and can draw overlays");
+                activity.startService(new Intent(activity, TextOverlayService.class));
+            }
+        } else {
+            Log.d(TAG, "onActivityStarted: Can draw overlays");
             activity.startService(new Intent(activity, TextOverlayService.class));
         }
     }
 
     @Override
+    public void onActivityResumed(Activity activity) {
+    }
+
+    @Override
     public void onActivityPaused(Activity activity) {
-        Log.d(TAG, "onActivityPaused");
-        activity.stopService(new Intent(activity, TextOverlayService.class));
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-
+        Log.d(TAG, "onActivityStopped");
+        activity.stopService(new Intent(activity, TextOverlayService.class));
     }
 
     @Override

@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
-        applicationId 'com.example.versioninfo'
+        applicationId 'com.example.textoverlay'
         versionCode 1
         versionName '1.0.0'
     }
