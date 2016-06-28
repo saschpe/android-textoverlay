@@ -7,7 +7,8 @@ that every screenshot that QA or beta testers do will automatically include the
 product flavor or build type of your APK. You can provide additional information
 such as the Git commit hash or arbitrary strings easily:
 
--![Example](doc/img/example.png)
+![Overlay](doc/img/default.png)
+![Updated overlay](doc/img/updated.png)
 
 # Usage
 You can start / stop the text overlay service the default way in your activities:
