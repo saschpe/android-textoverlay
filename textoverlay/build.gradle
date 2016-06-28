@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
-        versionName '1.0.0'
+        versionName '1.0.1'
     }
 
     lintOptions {
