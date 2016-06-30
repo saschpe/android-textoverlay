@@ -38,30 +38,32 @@ public final class TextOverlayActivityLifecycleCallbacks implements Application.
 
     @Override
     public void onActivityStarted(Activity activity) {
-        Log.d(TAG, "onActivityStarted");
+        Log.d(TAG, "onActivityStarted: " + activity.getClass().getSimpleName());
+    }
+
+    @Override
+    public void onActivityResumed(Activity activity) {
+        Log.d(TAG, "onActivityResumed: " + activity.getClass().getSimpleName());
         if (Build.VERSION.SDK_INT >= 23) {
             if (Settings.canDrawOverlays(activity)) {
-                Log.d(TAG, "onActivityStarted: API level 23 and can draw overlays");
+                Log.d(TAG, "onActivityResumed: API level 23 and can draw overlays");
                 activity.startService(new Intent(activity, TextOverlayService.class));
             }
         } else {
-            Log.d(TAG, "onActivityStarted: Can draw overlays");
+            Log.d(TAG, "onActivityResumed: Can draw overlays");
             activity.startService(new Intent(activity, TextOverlayService.class));
         }
     }
 
     @Override
-    public void onActivityResumed(Activity activity) {
-    }
-
-    @Override
     public void onActivityPaused(Activity activity) {
+        Log.d(TAG, "onActivityPaused: " + activity.getClass().getSimpleName());
+        activity.stopService(new Intent(activity, TextOverlayService.class));
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        Log.d(TAG, "onActivityStopped");
-        activity.stopService(new Intent(activity, TextOverlayService.class));
+        Log.d(TAG, "onActivityStopped: " + activity.getClass().getSimpleName());
     }
 
     @Override

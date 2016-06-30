@@ -58,6 +58,7 @@ public final class TextOverlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand");
         getTextFromIntent(intent);
         return super.onStartCommand(intent, flags, startId);
     }

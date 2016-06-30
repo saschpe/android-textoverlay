@@ -21,6 +21,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.OtherActivity"
+            android:parentActivityName=".activity.MainActivity"> <!-- We have appropriate <meta-data/> -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

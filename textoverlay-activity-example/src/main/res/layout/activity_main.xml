@@ -19,10 +19,17 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_text"
         android:onClick="setText" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_other_activity"
+        android:onClick="startOtherActivity" />
 
 </LinearLayout>

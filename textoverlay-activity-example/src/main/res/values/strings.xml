@@ -4,4 +4,6 @@
     <string name="description">Text overlay information is displayed as a system window atop of
         other content. Enter some text below and send a broadcast to update the text.</string>
     <string name="update_text">Update text</string>
+    <string name="start_other_activity">Start other activity</string>
+    <string name="other_activity">Other activity</string>
 </resources>

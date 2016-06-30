@@ -1,5 +1,6 @@
 package com.example.textoverlay.one.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,5 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setText(View view) {
         TextOverlayService.setText(this, editText.getText().toString());
+    }
+
+    public void startOtherActivity(View view) {
+        startActivity(new Intent(this, OtherActivity.class));
     }
 }
