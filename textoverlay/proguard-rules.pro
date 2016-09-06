@@ -1,1 +1,2 @@
+-keepattributes EnclosingMethod
 -keep class saschpe.textoverlay.** { *; }
