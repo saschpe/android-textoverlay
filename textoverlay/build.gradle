@@ -3,12 +3,12 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion project.compileSdkVersion
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
+        minSdkVersion 14
+        targetSdkVersion 25
         versionName '1.0.5'
     }
 
@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-v4:$project.supportLibraryVersion"
+    compile 'com.android.support:support-v4:25.0.1'
 }
 
 group = 'saschpe'

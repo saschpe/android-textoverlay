@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.compileSdkVersion
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
         applicationId 'com.example.textoverlay.one'
-        versionCode 6
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 140105
         versionName '1.0.5'
     }
 
@@ -19,6 +19,5 @@ android {
 
 dependencies {
     compile project(':textoverlay')
-
-    compile "com.android.support:appcompat-v7:$project.supportLibraryVersion"
+    compile 'com.android.support:appcompat-v7:25.0.1'
 }
