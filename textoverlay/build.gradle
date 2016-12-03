@@ -55,7 +55,7 @@ version = android.defaultConfig.versionName
 ext {
     siteUrl = 'https://github.com/saschpe/android-textoverlay'
     gitUrl = 'https://github.com/saschpe/android-textoverlay.git'
-    descr = 'Useful for debugging purposes, because all QA / beta tester screenshots will include build type, product flavor and additional information provided by you.'
+    descr = 'Provides a simple service that allows to display arbitrary text as a system-window overlay.'
 }
 
 Properties properties = new Properties()
