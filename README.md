@@ -1,4 +1,4 @@
-# TextOverlay
+# Android TextOverlay
 [ ![Download](https://api.bintray.com/packages/saschpe/maven/android-textoverlay/images/download.svg) ](https://bintray.com/saschpe/maven/android-textoverlay/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TextOverlay-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3883)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
