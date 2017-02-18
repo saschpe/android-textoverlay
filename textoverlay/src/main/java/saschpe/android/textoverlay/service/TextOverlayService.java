@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package saschpe.textoverlay.service;
+package saschpe.android.textoverlay.service;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -38,7 +38,7 @@ import android.widget.TextView;
  *
  * If the app targets API level 23 or higher, the app user must explicitly grant this permission to
  * the app through a permission management screen. You can either do this yourself or use the
- * {@link saschpe.textoverlay.app.TextOverlayActivityLifecycleCallbacks} for convenience.
+ * {@link saschpe.android.textoverlay.app.TextOverlayActivityLifecycleCallbacks} for convenience.
  *
  * @see <a href="https://developer.android.com/reference/android/Manifest.permission.html#SYSTEM_ALERT_WINDOW">SYSTEM_ALERT_WINDOW</a>
  * @see <a href="https://developer.android.com/reference/android/provider/Settings.html#ACTION_MANAGE_OVERLAY_PERMISSION">ACTION_MANAGE_OVERLAY_PERMISSION</a>
@@ -47,8 +47,8 @@ public final class TextOverlayService extends Service {
     private static final String TAG = TextOverlayService.class.getSimpleName();
     private static String lastUsedOverlayText;
 
-    public static final String ACTION_SET_TEXT = "saschpe.textoverlay.service.SET_TEXT";
-    public static final String EXTRA_TEXT = "saschpe.textoverlay.service.text";
+    public static final String ACTION_SET_TEXT = "saschpe.android.textoverlay.service.SET_TEXT";
+    public static final String EXTRA_TEXT = "saschpe.android.textoverlay.service.text";
 
     private TextView textView;
 

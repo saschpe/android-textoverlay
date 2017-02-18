@@ -25,7 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.textoverlay.two.BuildConfig;
 
-import saschpe.textoverlay.service.TextOverlayService;
+import saschpe.android.textoverlay.service.TextOverlayService;
 
 /**
  * Example base activity that implements text overlay handling.

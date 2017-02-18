@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package saschpe.textoverlay.app;
+package saschpe.android.textoverlay.app;
 
 import android.app.Activity;
 import android.app.Application;
@@ -25,7 +25,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
-import saschpe.textoverlay.service.TextOverlayService;
+import saschpe.android.textoverlay.service.TextOverlayService;
 
 /**
  * Activity lifecycle callbacks that handle {@link TextOverlayService} interactions.

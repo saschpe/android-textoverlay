@@ -1,2 +1,2 @@
 -keepattributes EnclosingMethod
--keep class saschpe.textoverlay.** { *; }
+-keep class saschpe.android.textoverlay.** { *; }

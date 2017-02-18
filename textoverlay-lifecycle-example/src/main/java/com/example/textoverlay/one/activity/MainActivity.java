@@ -24,7 +24,7 @@ import android.widget.EditText;
 
 import com.example.textoverlay.one.R;
 
-import saschpe.textoverlay.service.TextOverlayService;
+import saschpe.android.textoverlay.service.TextOverlayService;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editText;

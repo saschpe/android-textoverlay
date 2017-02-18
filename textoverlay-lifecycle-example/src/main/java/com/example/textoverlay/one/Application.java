@@ -16,8 +16,8 @@
 
 package com.example.textoverlay.one;
 
-import saschpe.textoverlay.app.TextOverlayActivityLifecycleCallbacks;
-import saschpe.textoverlay.service.TextOverlayService;
+import saschpe.android.textoverlay.app.TextOverlayActivityLifecycleCallbacks;
+import saschpe.android.textoverlay.service.TextOverlayService;
 
 public class Application extends android.app.Application {
     @Override
