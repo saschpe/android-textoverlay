@@ -69,8 +69,8 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 bintray {
-    user = properties["bintray.user"]
-    key = properties["bintray.apikey"]
+    user = project.properties["bintray.user"]
+    key = project.properties["bintray.apikey"]
 
     configurations = ['archives'] //When uploading configuration files
     pkg {
