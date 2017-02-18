@@ -73,7 +73,7 @@ Check out the provided example applications for different ways to use this libra
 
 # Download
 ```groovy
-compile 'saschpe.android:textoverlay:1.0.5'
+compile 'saschpe.android:textoverlay:1.0.6'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
