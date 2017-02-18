@@ -2,6 +2,7 @@
 [ ![Download](https://api.bintray.com/packages/saschpe/maven/android-textoverlay/images/download.svg) ](https://bintray.com/saschpe/maven/android-textoverlay/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TextOverlay-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3883)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Build Status](https://travis-ci.org/saschpe/android-textoverlay.svg?branch=master)](https://travis-ci.org/saschpe/android-textoverlay)
 
 This library provides a simple service that allows to display arbitrary text as a
 system-window overlay.
