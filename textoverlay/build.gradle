@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.file) {
+    Properties localProperties = new Properties()
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+    localProperties.each { key, value ->
+        properties.ext.set(key, value)
+    }
+}
+
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 25
@@ -58,12 +65,12 @@ ext {
     descr = 'Provides a simple service that allows to display arbitrary text as a system-window overlay.'
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = properties["bintray.user"]
+    key = properties["bintray.apikey"]
 
     configurations = ['archives'] //When uploading configuration files
     pkg {
