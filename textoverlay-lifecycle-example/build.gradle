@@ -24,8 +24,8 @@ android {
         applicationId 'com.example.textoverlay.one'
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 140106
-        versionName '1.0.6'
+        versionCode 140107
+        versionName '1.0.7'
     }
 
     lintOptions {
