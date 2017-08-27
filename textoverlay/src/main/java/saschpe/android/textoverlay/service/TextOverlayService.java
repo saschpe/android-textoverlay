@@ -101,8 +101,10 @@ public final class TextOverlayService extends Service {
                 PixelFormat.TRANSLUCENT);
         params.gravity = Gravity.CENTER | Gravity.BOTTOM;
         params.setTitle("Text Overlay");
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        wm.addView(textView, params);
+        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        if (windowManager != null) {
+            windowManager.addView(textView, params);
+        }
 
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, new IntentFilter(ACTION_SET_TEXT));
     }
@@ -113,7 +115,10 @@ public final class TextOverlayService extends Service {
         Log.d(TAG, "onDestroy");
         LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReceiver);
 
-        ((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(textView);
+        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        if (windowManager != null) {
+            windowManager.removeView(textView);
+        }
         textView = null;
     }
 
@@ -122,7 +127,7 @@ public final class TextOverlayService extends Service {
         return null;
     }
 
-    private void getTextFromIntent(Intent intent) {
+    private void getTextFromIntent(final Intent intent) {
         // Get extra data included in the Intent
         final String message = intent.getStringExtra(EXTRA_TEXT);
         if (message != null) {

@@ -19,7 +19,7 @@ package com.example.textoverlay.one;
 import saschpe.android.textoverlay.app.TextOverlayActivityLifecycleCallbacks;
 import saschpe.android.textoverlay.service.TextOverlayService;
 
-public class Application extends android.app.Application {
+public final class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();

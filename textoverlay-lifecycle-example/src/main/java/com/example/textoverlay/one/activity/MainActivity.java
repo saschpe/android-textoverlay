@@ -26,7 +26,7 @@ import com.example.textoverlay.one.R;
 
 import saschpe.android.textoverlay.service.TextOverlayService;
 
-public class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity {
     private EditText editText;
 
     @Override
@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editText = (EditText) findViewById(R.id.editText);
+        editText = findViewById(R.id.editText);
     }
 
-    public void setText(View view) {
+    public void setText(final View view) {
         TextOverlayService.setText(this, editText.getText().toString());
     }
 
-    public void startOtherActivity(View view) {
+    public void startOtherActivity(final View view) {
         startActivity(new Intent(this, OtherActivity.class));
     }
 }
