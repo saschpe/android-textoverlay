@@ -16,6 +16,7 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.textoverlay.two">
 
     <!-- This is enough for API-level < 23, afterwards you have to ask for the user's approval.
@@ -26,7 +27,8 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -38,7 +40,8 @@
 
         <activity
             android:name=".activity.OtherActivity"
-            android:parentActivityName=".activity.MainActivity"> <!-- We have appropriate <meta-data/> -->
+            android:parentActivityName=".activity.MainActivity"
+            tools:ignore="UnusedAttribute"> <!-- We have appropriate <meta-data/> -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />

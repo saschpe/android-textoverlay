@@ -14,8 +14,9 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <color name="red">#FF0000</color>
+    <!-- Color is loaded dynamically, hence Lint won't find it's usage -->
+    <color name="red" tools:ignore="UnusedResources">#FF0000</color>
 
 </resources>
