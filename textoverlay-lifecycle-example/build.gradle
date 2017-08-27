@@ -34,6 +34,6 @@ android {
 }
 
 dependencies {
-    compile project(':textoverlay')
-    compile 'com.android.support:appcompat-v7:26.0.1'
+    implementation project(':textoverlay')
+    implementation 'com.android.support:appcompat-v7:26.0.1'
 }
