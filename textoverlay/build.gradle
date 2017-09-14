@@ -53,7 +53,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:26.0.1'
+    compile 'com.android.support:support-v4:26.0.2'
 }
 
 group = 'saschpe.android'
