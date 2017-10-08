@@ -24,8 +24,8 @@ android {
         applicationId 'com.example.textoverlay.one'
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 140110
-        versionName '1.1.0'
+        versionCode 140111
+        versionName '1.1.1'
     }
 }
 
